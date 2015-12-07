@@ -1,7 +1,8 @@
 # testelectron
 
-> My divine app
+> Electron app boilerplate
 
+Don't forget to install nodejs and stuff.
 
 ## Dev
 

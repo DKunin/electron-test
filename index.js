@@ -3,6 +3,7 @@ const electron = require('electron');
 const app = electron.app;
 const fs = require('fs');
 const path  = require('path');
+const ipc = require('ipc');
 // report crashes to the Electron project
 require('crash-reporter').start();
 
@@ -22,7 +23,7 @@ function createMainWindow() {
 	const win = new electron.BrowserWindow({
 		width: 600,
 		height: 400,
-		// kiosk: true
+		kiosk: true
 	});
 
 	win.loadURL(`file://${__dirname}/index.html`);
@@ -43,20 +44,10 @@ app.on('activate-with-no-open-windows', () => {
 	}
 });
 
-var ipc = require('ipc');
-var execa = require('execa');
-
-
 ipc.on('invokeAction', function(event, data){
-    var programmPath = path.resolve('C:/Program Files/WebSoft/WebTutorAdmin/spxml.exe');
-    var programmPath2 = path.resolve('Program Files/WebSoft/WebTutorAdmin/spxml.exe');
     var pathVar = path.resolve('./');
-    
-    execa.shell(programmPath).then(function(result){
-      event.sender.send('actionReply', result);
-    });
-    fs.writeFile( pathVar + '/smt', 'asdasda', function(err, data){
-    	event.sender.send('actionReply', [pathVar, programmPath, programmPath2].join('\n') || err || data);
+    fs.writeFile( pathVar + '/nameOfFileToSave.txt', 'Строчка в файл', function(err, data){
+    	event.sender.send('actionReply', 'ok');
     });
 });
 
