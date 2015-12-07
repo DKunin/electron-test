@@ -3,7 +3,7 @@
 > Electron app boilerplate
 
 Don't forget to install nodejs and stuff.
-
+[Download Node](https://nodejs.org/en/)
 ## Dev
 
 ```
