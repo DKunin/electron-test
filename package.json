@@ -26,7 +26,7 @@
     "electron"
   ],
   "dependencies": {
-    "electron-debug": "^0.5.0",
+    "electron-debug": "^0.5.1",
     "execa": "^0.1.0"
   },
   "devDependencies": {

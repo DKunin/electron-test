@@ -5,10 +5,10 @@ const fs = require('fs');
 const path  = require('path');
 const ipc = require('ipc');
 // report crashes to the Electron project
-require('crash-reporter').start();
+//require('crash-reporter').start();
 
 // adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')();
+//require('electron-debug')();
 
 // prevent window being garbage collected
 let mainWindow;
@@ -28,7 +28,6 @@ function createMainWindow() {
 
 	win.loadURL(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);
-
 	return win;
 }
 

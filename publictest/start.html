@@ -1,0 +1,55 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Тест</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="script/lib/jquery.js"></script>
+<script type="text/javascript" src="script/lib/jQuery-UI/jquery-ui-1.10.3.custom.js"></script>
+<!--<script type="text/javascript" src="script/lib/pdf/jspdf.min.js"></script>-->
+<script type="text/javascript" src="script/lib/pdf/pdfmake/pdfmake.min.js"></script>
+<script type="text/javascript" src="script/lib/pdf/pdfmake/vfs_fonts.js"></script>
+<script type="text/javascript" src="script/test-api.js"></script>
+<script type="text/javascript" src="script/q-bank.js"></script>
+<script type="text/javascript" src="script/t-report.js"></script>
+</head>
+<body>
+<img id=logo src="images/logo.png">
+<!-- TEST body -->
+<div id=t_body>
+<h1>Инструкция по выполнению теста</h1>
+<div id=t_content>
+<div id=intro>
+<ol>
+<li>Тест содержит 186 вопросов. Продолжительность теста составляет 120 минут.</li>
+<li>Вопросы появляются по очереди. Пропустить вопрос, а также вернуться к вопросу и изменить ответ нельзя.</li>
+<li>Обратите внимание, что некоторые вопросы могут иметь несколько вариантов ответа.</li>
+</ol>
+<div class="validation user">
+<table class=intro-validation>
+<tbody>
+<tr><td class=input-title><span>Фамилия Имя Отчество</span></td><td><form><input class="txt active" id=user-name-input type="text"></input></form></td></tr>
+<tr><td class=input-title><span>Должность</span></td><td><form><input class="txt active" id=user-position-input type="text"></input></form></td></tr>
+<tr><td class=input-title><span>Статус</span></td><td><form><select id=user-status><option></option><option>Кандидат</option><option>Руководитель</option></select></form></td></tr>
+<tr><td class=input-title><span>Вид образовательного учреждения</span></td><td><form><select id=user-office-type><option></option><option>Учреждение дополнительного образования детей</option><option>Профессиональное училище</option><option>Колледж</option><option>ВУЗ</option></select></form></td></tr>
+<tr><td class=input-title><span>Полное наименование учреждения</span></td><td><form><input class="txt active" id=user-office-name type="text"></input></form></td></tr>
+<tr><td class=input-title><span>Вид аттестации</span></td><td><form><select id=certification-type><option></option><option>Очередная</option><option>Внеочередная</option></select></form></td></tr>
+<tr><td class=input-title><span>Номер попытки</span></td><td><form><input class="txt active" id=user-try-number type="text"></input></form></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id=t_controls>
+<button class=t_button id=b-start type=button>Начать тест</button>
+<button class=t_button id=b-proceed type=button>Следующий вопрос</button>
+<button class=t_button id=b-finish type=button>Завершающий этап</button>
+<button class=t_button id=b-save type=button>Сохранить результаты</button>
+</div>
+<div id=t_service>
+<p id=timer></p><p id=b2sec9timer></p>
+</div>
+</div>
+<!-- /TEST body -->
+</body>
+</html>
