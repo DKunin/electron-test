@@ -1,0 +1,44 @@
+{
+  "name": "testelectron",
+  "productName": "Testelectron",
+  "version": "0.0.0",
+  "description": "My divine app",
+  "license": "MIT",
+  "repository": "DKunin/testelectron",
+  "author": {
+    "name": "Dmitri Kunin",
+    "email": "info@dkunin.ru",
+    "url": "dkun.in"
+  },
+  "electronVersion": "0.35.0",
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "rm -rf dist && electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion"
+  },
+  "files": [
+    "index.js",
+    "index.html",
+    "index.css"
+  ],
+  "keywords": [
+    "electron-app",
+    "electron"
+  ],
+  "dependencies": {
+    "electron-debug": "^0.5.0",
+    "execa": "^0.1.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.0.0",
+    "electron-prebuilt": "^0.35.0",
+    "xo": "^0.11.1"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}

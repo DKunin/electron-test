@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Electron boilerplate</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Electron boilerplate</h1>
+			</header>
+			<section class="main">
+				
+				<button id="auth-button">auth-button</button>
+				<div id="console"></div>
+			</section>
+
+			<footer></footer>
+		</div>
+		<script type="text/javascript">
+			var ipc = require('ipc');
+			var authButton = document.getElementById('auth-button');
+			var log = document.getElementById('console');
+			authButton.addEventListener('click', function(){
+			    ipc.send('invokeAction', 'someData');
+			    ipc.on('actionReply', function(response){ // would it be possible to use .once here? Does someone know?
+			        alert(response);
+			        log.innerText = [log.innerText, response].join('<br>');
+			    })
+			});
+</script>
+	</body>
+</html>
