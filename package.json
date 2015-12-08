@@ -27,7 +27,8 @@
   ],
   "dependencies": {
     "electron-debug": "^0.5.1",
-    "execa": "^0.1.0"
+    "execa": "^0.1.0",
+    "pdfmake": "^0.1.18"
   },
   "devDependencies": {
     "electron-packager": "^5.0.0",

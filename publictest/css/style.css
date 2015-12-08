@@ -30,7 +30,6 @@ h1 {
 	font-size: 21px;
 	padding: 20px 0px 20px 0px;
 	margin-left: 4px; 
-	/*background-color: green;*/
 }
 
 h2 {
@@ -38,11 +37,6 @@ h2 {
 	font-size: 21px;
 	padding: 30px 0px 20px 0px;
 	margin-left: 4px;
-	/*background-color: red;*/
-}
-
-h2.first-question {
-	padding: 120px 0px 20px 0px;
 }
 
 p {
@@ -59,7 +53,6 @@ p.remark {
 	font-size: 12px;
 	font-style: italic;
 	text-align: center;
-	/*margin: 0px 0px 10px 0px;*/
 }
 
 p.q_txt {
@@ -96,30 +89,24 @@ img#logo {
 }
 
 div#t_body {
-	width: 980px; /* 900px;*/
+	width: 980px;
 	height: 100%;
 	background-color: #F3F3F3;
-	/*background-color: green;*/
 	margin: 0 auto;
 	padding: 10px 0px 0px 0px;
-	/*padding: 0px;*/
 }
 
 div#t_content {
 	width: 100%;
-	/*background-color: green;*/
 	margin-bottom: 30px;
 	padding: 0px 20px 0px 20px;
 }
 
 div.q_box {
-	/*height: 450px;*/
-	height: 69%; /* 65% */
+	height: 69%;
 	overflow: auto;
 	padding: 0px 10px 0px 10px;
-	/*margin: 0px 10px 0px 10px;*/
 	margin: 0px;
-	/*background-color: blue;*/
 	border-bottom: 1px dashed #D7D7D7;
 	border-top: 1px dashed #D7D7D7;
 }
@@ -132,11 +119,9 @@ div#t_controls {
 	width: 980px;
 	position: fixed;
 	bottom: 90px;
-	/*background-color: yellow;	*/
 }
 
 div#t_service {
-	/*background-color: blue;*/
 	width: 980px;
 	position: fixed;
 	margin: 0px 0px 0px 0px;
@@ -169,7 +154,6 @@ div#modal-win-bgr {
 div#notification {
 	display: none;
 	position: absolute;
-	/*top: 63%;*/
 	top: 0px;
 	width: 980px;
 	height: 80px;
@@ -202,14 +186,7 @@ div.q_box.b2sec9guide ul.q_options li.wrong {
 div.q_box.b2sec9guide ul.q_options li.correct {
 	background-color: #ddfe9b;
 }
-/*
-ul.q_options.b2sec9guide li.wrong {
-	background-color: #fabcbe;
-}
 
-ul.q_options.b2sec9guide li.correct {
-	background-color: #ddfe9b;	
-}*/
 
 /* ####################################################################### Content ####################################################################### */
 p.aux {
@@ -250,8 +227,6 @@ div.validation.user {
 	background-color: #F3F3F3;
 	z-index: 999;
 	padding: 20px 20px 20px 0px;
-	/*margin: auto;*/
-	/*background-color: red;*/
 }
 
 div.validation.admin {
@@ -330,8 +305,7 @@ textarea {
 
 input.txt#user-name-input, input.txt#user-position-input, input.txt#user-office-name, input.txt#user-try-number {
 	height: 35px;
-	width: 100% /*width: 570px;*/
-	/*height: 40px;*/
+	width: 100% 
 }
 
 input#pass {
@@ -345,15 +319,6 @@ select#user-status, select#user-office-type, select#certification-type {
 	border-color: #D4E5FF;
 	padding-left: 5px;
 }
-
-/*
-input.txt.initial#user-name-input {
-	font-size: 14px;
-	font-style: italic;
-	color: #707070;
-}
-*/
-
 
 
 /* ----------------- Block 2 Section 2 Case reminder (in Modal Window) ----------------- */
@@ -381,11 +346,9 @@ ul.q_options {
 ul.q_options li {
 	text-indent: -23px;
 	color: #000000;
-	/*color: #707070;*/
 	margin-bottom: 30px;
 	cursor: pointer;
 	padding: 0px;
-	/*background-color: blue;*/
 }
 
 ul.q_options li.b2sec2-selected-options {

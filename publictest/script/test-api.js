@@ -34,7 +34,7 @@ mt.Model = {
 	MaxScores: 3,
 	StartTime: '',
 	EndTime: '',
-	TestDuration: 7200 //  2 hours in seconds 7200
+	TestDuration: 15 //  2 hours in seconds 7200
 }
 
 mt.DOM = {
@@ -130,7 +130,6 @@ mt.Visual = {
 		$(document).on('click', mt.DOM.ModalWinBgr, {target: mt.DOM.ModalWinBgr}, function(event){
 			var $ModalWin = $(mt.DOM.ModalWin);
 			mt.Visual.UserNotification.remove();
-			/*mt.Visual.Effects.hide($(mt.DOM.tNotification), 'Slidedown');*/
 			mt.Visual.Effects.hide($ModalWin, 'Fastfade');
 			$ModalWin.queue(function(){
 				mt.DOM.remove(this);
@@ -500,8 +499,6 @@ mt.Visual = {
 			mt.DOM.remove(this);
 		});
 		
-		// Hide Title 2 temporarily
-		/*mt.Visual.Effects.hide($Title2, 'Dropleft');*/
 		
 		// Remove intro
 		mt.Visual.Effects.hide($Intro, 'Dropleft');
@@ -523,9 +520,7 @@ mt.Visual = {
 			$BProceed.css('display', 'block'); // Otherwise jQ sets block-inline for button
 		});
 		
-		$Title2.addClass('first-question');
-		$NewQuestion.addClass('first-question');
-		
+				
 		// Enter Full Screen mode
 		setTimeout(function(){ 
 			var elem = document.documentElement;
@@ -551,10 +546,7 @@ mt.Visual = {
 		var $OldQuestion = $(mt.DOM.qBox);
 		var $BProceed = $(mt.DOM.bProceed);
 		
-		if ($Title2.hasClass('first-question')) {
-			$Title2.removeClass('first-question');
-		}
-		
+				
 		// if proceed button text was changed for Block 2 Section 9 Guide
 		if ($BProceed.text()==='Далее') {
 			$BProceed.text('Следующий вопрос');
@@ -583,7 +575,6 @@ mt.Visual = {
 	},
 	
 	finish: function() {
-		/*var $Title1 = $(mt.DOM.Title1);*/
 		var $Title2 = $(mt.DOM.Title2);
 		var $BFinish = $(mt.DOM.bFinish);
 		var $BSave = $(mt.DOM.bSave);
@@ -602,13 +593,11 @@ mt.Visual = {
 			mt.DOM.remove(this);
 		});
 		
-		/*mt.Visual.Effects.hide($Title1, 'Fade');*/
 		mt.Visual.Effects.hide($Title2, 'Fade');
 		
 		mt.Visual.Effects.hide($LastQuestion, 'Dropleft');
 		$LastQuestion.queue(function(){
 			mt.DOM.remove(this);
-			/*mt.DOM.remove($Title1);*/
 			mt.DOM.remove($Title2);
 			mt.Visual.UserNotification.make('FinalMessage');
 		});
@@ -746,11 +735,6 @@ mt.Control = {
 	},
 	
 	finish: function(event) {
-		/*if (!mt.Visual.Forms.checkHasAsnwer()) {
-			mt.Visual.UserNotification.make('NoAnswer');
-			return false
-		}*/
-		
 		var block = mt.Control.qCurrentIndex[0];
 		var section = mt.Control.qCurrentIndex[1];
 		var question = mt.Control.qCurrentIndex[2];
@@ -787,7 +771,6 @@ mt.Control = {
 			var TotalSecQ = mt.Control.qToGetFromBlock1[i];
 			var CorrectAns = mt.Model.Block1Scores[i];
 			var Success = Math.floor((CorrectAns/TotalSecQ)*100);
-			/*mt.Model.Block1Scores[i] = mt.Model.Block1Scores[i].toString();*/
 			SecRes[0] = CorrectAns.toString();
 			SecRes[1] = Success.toString()+'%';
 			Block1Results[i] = SecRes;
@@ -970,7 +953,7 @@ mt.Control = {
 		
 		// 8. Thin out and shuffle Block 2, Section 8 questions
 		// The Section 8 consists of two logical two subsection
-		// Needed to randomly get 15 questions from first subsection (totally 60), and then 2 from second (totally 10)
+		// Needed to randomly get 10 questions from first subsection (totally 60), and then 1 from second (totally 10)
 		// Create two temp arrays for each subsection
 		var Sec8Sub1 = qBank.questions[1][7].slice(0, 60);
 		var Sec8Sub2 = qBank.questions[1][7].slice(60, 70);
@@ -1149,10 +1132,6 @@ mt.Control = {
 		fillInTheBlank: function(ans, block, section) {
 			var r = ans.val
 			return r
-			/*
-			var t = /доск\D объвлен\D/i;
-			string.search(t);
-			*/
 		},
 		make: function(block, section, question) {
 			var ans = mt.Visual.Forms.getAnswer(block, section, question);
@@ -1615,17 +1594,15 @@ mt.Block2Section9 = {
 	}
 }
 
+var ipc = require('ipc');
 
-$(document).ready(function(){	
-	//if (window.chrome) {
-		mt.init();
-	//}
-	// else {
-	// 	$('h1').text('');
-	// 	$('h2').text('');
-	// 	$('#t_controls').remove();
-	// 	$('#t_content').css('text-align', 'center');
-	// 	$('#t_content').html('<p>Для запуска данного теста требуется браузер Google Chrome. Щелкните правой кнопкой мыши по файлу "start.html", в появившемся меню выберите пункт «Открыть с помощью», в нем выберите пункт "Google Chrome".</p>');
-	// 	$('#t_content').append('<img src="images/not-chrome-guide.png">');
-	// }
+var authButton = document.getElementById('authbutton');
+
+authButton.addEventListener('click', function(){
+    ipc.send('invokeAction', 'someData');
+    ipc.on('actionReply', function(response){ 
+        alert(response);
+    })
 });
+
+$(document).ready(mt.init);

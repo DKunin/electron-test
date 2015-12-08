@@ -1,4 +1,20 @@
-﻿var tReport = {
+﻿
+
+var PdfPrinter = require('pdfmake');
+var fs = require('fs');
+var path = require('path');
+var fontsPath = path.resolve('./fonts/');
+
+var fonts = {
+	Roboto: {
+		normal: fontsPath + '/Roboto-Regular.ttf',
+		bold: fontsPath + '/Roboto-Medium.ttf',
+		italics: fontsPath + '/Roboto-Italic.ttf',
+		bolditalics: fontsPath + '/Roboto-Italic.ttf'
+	}
+};
+
+var tReport = {
 	style: {
 		/*OptionMargins: [[20, 0, 0, 5], [12, 0, 0, 5]],*/ // array contains margins
 		OptionColor : ['black', 'green'],
@@ -126,7 +142,6 @@
 		for (i=0; i<qObj.options.length; i++) {
 			var optTxt = qObj.options[i][0];
 			var optColor = qObj.options[i][1];
-			/*var optMargin = optStatus[i];*/
 			var optMarker;
 			if (optStatus[i]) {
 				optMarker = '>';
@@ -140,10 +155,7 @@
 			}
 			else {
 				/*optMarker = '';*/
-			}
-			
-			/*s[i+1] = { columns: [ {width: 5, text: optMarker, style: 'qOption', color: tReport.style.OptionColor[optColor]}, { width: '*', text: optTxt, style: 'qOption', color: tReport.style.OptionColor[optColor]} ], columnGap: 5 };*/	
-			
+			}	
 			
 		}
 		// returns an array of objects; each object defines a pdf line for final report
@@ -242,7 +254,7 @@
 			tReport.content.push({ text: SecSuccess, style: 'b1SecTotalResults' });
 	
 			// for each question in section
-			for (j=0; j<bank.questions[0][i].length; j++) {
+			for (var j=0; j<bank.questions[0][i].length; j++) {
 				var pdfLines = bank.questions[0][i][j].DataForReport; // DataForReport = ['q txt data', 'q options data']
 				// put question txt to content
 				tReport.content.push(pdfLines[0]);
@@ -263,12 +275,12 @@
 		
 		// Block 2
 		tReport.content.push({ text: bank.meta.titles.B2, style: 'BlockTitle', pageBreak: 'before'  });
-		for (i=0; i<bank.Block2DataForReport.length; i++) {
+		for (var i=0; i<bank.Block2DataForReport.length; i++) {
 			// Omit Section 7, its data for report is 0
 			if (bank.Block2DataForReport[i]!=0) {
 				var sectionTitle = 'B2Sec'+(i+1).toString();
 				tReport.content.push({ text: bank.meta.titles[sectionTitle], style: 'b2SecTitle' });
-				for (j=0; j<bank.Block2DataForReport[i].length; j++) {
+				for (var j=0; j<bank.Block2DataForReport[i].length; j++) {
 					var pdfLine = bank.Block2DataForReport[i][j];
 					tReport.content.push(pdfLine);
 				}
@@ -286,22 +298,21 @@
 				subject: 'Test Results',
 				keywords: 'none',
 			},
-			
 			footer: function(currentPage, pageCount) { 
 				var t = currentPage.toString(); /*'Страница ' + currentPage.toString() + ' из ' + pageCount;*/
 				return { text: t, style: 'footerTxt' } 
 			},
-			
-			// Background image
-			/*background: { image: tReport.logo },*/
-			
 			content: tReport.content,
-
 			styles: tReport.style.CompleteStyles
 			
 		};
-		
-		pdfMake.createPdf(docDefinition).open();
+
+
+		var printer = new PdfPrinter(fonts);
+		var now = new Date();
+		var pdfDoc = printer.createPdfKitDocument(docDefinition);
+		pdfDoc.pipe(fs.createWriteStream(path.resolve('./pdfs/'+now.getTime()+'.pdf')));
+		pdfDoc.end();
 		/*pdfMake.createPdf(docDefinition).download('Test-Results.pdf');*/
 		
 	},
