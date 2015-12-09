@@ -205,6 +205,10 @@ div#final-message {
 	padding: 130px 0px 0px 0px;
 }
 
+div#final-message p {
+	text-align: center;
+}
+
 ul.post-save-message {
 	margin: 0px 20px 0px 50px;
 }
@@ -389,7 +393,7 @@ button.t_button::-moz-focus-inner { /* Remove dotted outline on focus in FF */
 
 button.t_button#b-proceed, button.t_button#b-finish {
 	display: none;
-	width: 220px;
+	width: 240px;
 	height: 40px;
 	font-size: 18px;
 }

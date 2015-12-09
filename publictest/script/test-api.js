@@ -22,7 +22,7 @@ mt.Model = {
 		TryNumber: ''
 	},
 	AdminPass: 'admin2015',
-	IsAdmin: false,
+	IsAdmin: true,
 	TotalBlock1Scores: 0, // Total scores for Block 1. Conunting per question
 	Block1Scores: [0, 0, 0, 0, 0, 0, 0, 0], // Scores for Block 1 per Section
 	Block2Scores: [], // Scores for Block 2. Only scores for each section, except Section 10
@@ -34,7 +34,7 @@ mt.Model = {
 	MaxScores: 3,
 	StartTime: '',
 	EndTime: '',
-	TestDuration: 15 //  2 hours in seconds 7200
+	TestDuration: 10 //  2 hours in seconds 7200
 }
 
 mt.DOM = {
@@ -259,7 +259,7 @@ mt.Visual = {
 				place: mt.DOM.tBody 
 			},
 			FinalMessage: {
-				content: '<div id=final-message><h1>Тест завершен. Спасибо за работу!</h1><p>Тест завершен, однако результаты тестирования еще не сохранены. Не закрывайте это окно и не обновляйте страницу. Чтобы сохранить результаты нажмите кнопку внизу. Обратите внимание, что для сохранения результатов потребуется ввести пароль руководителя тестирования.</p></div>',
+				content: '<div id=final-message><h1>Тест завершен. Спасибо за работу!</h1><p>Обратитесь к специалисту, сопровождающему процедуру аттестации.</p></div>',
 				place: mt.DOM.tContent
 			},
 			PostSaveMessage: {
@@ -584,8 +584,8 @@ mt.Visual = {
 		mt.Visual.Effects.hide($BFinish, 'Fade');
 		$BFinish.queue(function(){
 			mt.DOM.remove(this);
-			mt.Visual.Effects.show($BSave, 'Fade');
-			$BSave.css('display', 'block'); // Otherwise jQ sets block-inline for button
+			/*mt.Visual.Effects.show($BSave, 'Fade');
+			$BSave.css('display', 'block');*/ // Otherwise jQ sets block-inline for button
 		});
 		
 		mt.Visual.Effects.hide($ServicePanel, 'Slideup');
@@ -753,6 +753,9 @@ mt.Control = {
 			}
 			
 			mt.Visual.finish();
+			
+			mt.Control.save();
+			
 		}
 	},
 	
@@ -1594,15 +1597,5 @@ mt.Block2Section9 = {
 	}
 }
 
-var ipc = require('ipc');
-
-var authButton = document.getElementById('authbutton');
-
-authButton.addEventListener('click', function(){
-    ipc.send('invokeAction', 'someData');
-    ipc.on('actionReply', function(response){ 
-        alert(response);
-    })
-});
 
 $(document).ready(mt.init);

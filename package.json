@@ -1,10 +1,9 @@
 {
-  "name": "testelectron",
-  "productName": "Testelectron",
-  "version": "0.0.0",
-  "description": "My divine app",
+  "name": "departmenttest",
+  "productName": "DepartmentTest",
+  "version": "0.1.0",
+  "description": "Electron app wrapper for simple html department test",
   "license": "MIT",
-  "repository": "DKunin/testelectron",
   "author": {
     "name": "Dmitri Kunin",
     "email": "info@dkunin.ru",

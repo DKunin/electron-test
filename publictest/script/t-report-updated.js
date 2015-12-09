@@ -1,9 +1,9 @@
-﻿'use strict';
+﻿
 
 var PdfPrinter = require('pdfmake');
 var fs = require('fs');
 var path = require('path');
-var fontsPath = path.resolve('./publictest/fonts/');
+var fontsPath = path.resolve('./fonts/');
 
 var fonts = {
 	Roboto: {
@@ -139,7 +139,7 @@ var tReport = {
 		
 		// create PDF line for each option
 		// optStatus is an array of numbers, where 1 = checked, 0 = nonchecked
-		for (var i=0; i<qObj.options.length; i++) {
+		for (i=0; i<qObj.options.length; i++) {
 			var optTxt = qObj.options[i][0];
 			var optColor = qObj.options[i][1];
 			var optMarker;
@@ -164,7 +164,7 @@ var tReport = {
 	
 	createBlock2SectionParagraph: function(template) {
 		var s = [];
-		for (var i=0; i<template.length; i++) {
+		for (i=0; i<template.length; i++) {
 			s[i] = { text: template[i], style: 'b2SecResults' };
 		}
 		// returns an array of objects; each object defines a pdf line for final report
@@ -243,7 +243,7 @@ var tReport = {
 		TotalBlock1Scores = 'Общая сумма правильных ответов: '+TotalBlock1Scores;
 		tReport.content.push({ text: TotalBlock1Scores, style: 'b1TotalResults' });
 		// for each section in block
-		for (var i=0; i<bank.questions[0].length; i++) {
+		for (i=0; i<bank.questions[0].length; i++) {
 			var sectionTitle = 'B1Sec'+(i+1).toString();
 			tReport.content.push({ text: bank.meta.titles[sectionTitle], style: 'SectionTitle' });
 			var SecTotalQ = 'Количество вопросов: '+qToGetFromBlock1[i];
@@ -259,7 +259,7 @@ var tReport = {
 				// put question txt to content
 				tReport.content.push(pdfLines[0]);
 				// put question options to content
-				for (var k=1; k<pdfLines.length; k++) {
+				for (k=1; k<pdfLines.length; k++) {
 					tReport.content.push(pdfLines[k]);
 				}
 				// put question correctness status to content
@@ -298,7 +298,6 @@ var tReport = {
 				subject: 'Test Results',
 				keywords: 'none',
 			},
-			
 			footer: function(currentPage, pageCount) { 
 				var t = currentPage.toString(); /*'Страница ' + currentPage.toString() + ' из ' + pageCount;*/
 				return { text: t, style: 'footerTxt' } 
@@ -307,15 +306,13 @@ var tReport = {
 			styles: tReport.style.CompleteStyles
 			
 		};
-		
+
+
 		var printer = new PdfPrinter(fonts);
 		var now = new Date();
 		var pdfDoc = printer.createPdfKitDocument(docDefinition);
-		console.log(docDefinition);
-		debugger;
 		pdfDoc.pipe(fs.createWriteStream(path.resolve('./pdfs/'+now.getTime()+'.pdf')));
 		pdfDoc.end();
-		//pdfMake.createPdf(docDefinition).open();
 		/*pdfMake.createPdf(docDefinition).download('Test-Results.pdf');*/
 		
 	},
