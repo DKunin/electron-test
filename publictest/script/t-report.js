@@ -1,18 +1,5 @@
 ﻿'use strict';
-
-var PdfPrinter = require('pdfmake');
-var fs = require('fs');
-var path = require('path');
-var fontsPath = path.resolve('./publictest/fonts/');
-
-var fonts = {
-	Roboto: {
-		normal: fontsPath + '/Roboto-Regular.ttf',
-		bold: fontsPath + '/Roboto-Medium.ttf',
-		italics: fontsPath + '/Roboto-Italic.ttf',
-		bolditalics: fontsPath + '/Roboto-Italic.ttf'
-	}
-};
+var ipc = require('ipc');
 
 var tReport = {
 	style: {
@@ -307,16 +294,8 @@ var tReport = {
 			styles: tReport.style.CompleteStyles
 			
 		};
-		
-		var printer = new PdfPrinter(fonts);
-		var now = new Date();
-		var pdfDoc = printer.createPdfKitDocument(docDefinition);
-		console.log(docDefinition);
-		debugger;
-		pdfDoc.pipe(fs.createWriteStream(path.resolve('./pdfs/'+now.getTime()+'.pdf')));
-		pdfDoc.end();
-		//pdfMake.createPdf(docDefinition).open();
-		/*pdfMake.createPdf(docDefinition).download('Test-Results.pdf');*/
+
+		ipc.send('sendToPdf', docDefinition);
 		
 	},
 	

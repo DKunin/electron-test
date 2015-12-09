@@ -1,8 +1,8 @@
 {
-  "name": "departmenttest",
-  "productName": "DepartmentTest",
-  "version": "0.1.0",
-  "description": "Electron app wrapper for simple html department test",
+  "name": "ministryofculture",
+  "productName": "MinistryOfCultureTest",
+  "version": "1.0.0",
+  "description": "Electron app wrapper for simple html Ministry of culture test",
   "license": "MIT",
   "author": {
     "name": "Dmitri Kunin",
@@ -13,7 +13,7 @@
   "scripts": {
     "test": "xo",
     "start": "electron .",
-    "build": "rm -rf dist && electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion"
+    "build": "electron-packager . MinistryOfCultureTest --out=dist --ignore='^/dist$' --prune --asar --platform=win32 --arch=x64 --version=$npm_package_electronVersion && mv ./dist/MinistryOfCultureTest-win32-x64 ./dist/MinistryOfCultureTest && mkdir ./dist/MinistryOfCultureTest/pdfs && cp -rf ./fonts ./dist/MinistryOfCultureTest/fonts"
   },
   "files": [
     "index.js",
@@ -27,7 +27,8 @@
   "dependencies": {
     "electron-debug": "^0.5.1",
     "execa": "^0.1.0",
-    "pdfmake": "^0.1.18"
+    "pdfmake": "^0.1.18",
+    "ramda": "^0.18.0"
   },
   "devDependencies": {
     "electron-packager": "^5.0.0",

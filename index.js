@@ -1,9 +1,23 @@
 'use strict';
-const electron = require('electron');
-const app = electron.app;
-const fs = require('fs');
-const path  = require('path');
-const ipc = require('ipc');
+const electron   = require('electron');
+const app        = electron.app;
+const fs         = require('fs');
+const path       = require('path');
+const ipc        = require('ipc');
+const R          = require('ramda');
+const PdfPrinter = require('pdfmake');
+const fontsPath  = path.resolve('./fonts');
+
+const fonts = {
+	Roboto: {
+		normal: fontsPath + '/Roboto-Regular.ttf',
+		bold: fontsPath + '/Roboto-Medium.ttf',
+		italics: fontsPath + '/Roboto-Italic.ttf',
+		bolditalics: fontsPath + '/Roboto-Italic.ttf'
+	}
+};
+
+var printer = new PdfPrinter(fonts);
 // report crashes to the Electron project
 //require('crash-reporter').start();
 
@@ -23,7 +37,7 @@ function createMainWindow() {
 	const win = new electron.BrowserWindow({
 		width: 960,
 		height: 700,
-		//kiosk: true
+		kiosk: true
 	});
 
 	win.loadURL(`file://${__dirname}/publictest/start.html`);
@@ -44,11 +58,15 @@ app.on('activate-with-no-open-windows', () => {
 	}
 });
 
-ipc.on('invokeAction', function(event, data){
+ipc.on('sendToPdf', function(event, data){
     var pathVar = path.resolve('./');
-    fs.writeFile( pathVar + '/nameOfFileToSave.txt', 'Строчка в файл', function(err, data){
-    	event.sender.send('actionReply', 'ok');
-    });
+		var now = new Date();
+		var pdfDoc = printer.createPdfKitDocument(data);
+		var fileName = R.compose(R.prop('text'), R.head, R.filter(function(item){
+			return item.style === 'UserName';
+		}), R.prop('content'))(data); 
+		pdfDoc.pipe(fs.createWriteStream(path.resolve(pathVar + '/pdfs/' + fileName + now.getTime() + '.pdf')));
+		pdfDoc.end();
 });
 
 app.on('ready', () => {
