@@ -34,7 +34,7 @@ mt.Model = {
 	MaxScores: 3,
 	StartTime: '',
 	EndTime: '',
-	TestDuration: 10 //  2 hours in seconds 7200
+	TestDuration: 7200 //  2 hours in seconds 7200
 }
 
 mt.DOM = {
