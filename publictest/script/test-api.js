@@ -17,14 +17,12 @@ mt.Model = {
 		Position: '',
 		Status: '',
 		OfficeType: '',
-		OfficeName: '',
-		CertificationType: '',
-		TryNumber: ''
+		OfficeName: ''
 	},
 	AdminPass: 'admin2015',
 	IsAdmin: true,
 	TotalBlock1Scores: 0, // Total scores for Block 1. Conunting per question
-	Block1Scores: [0, 0, 0, 0, 0, 0, 0, 0], // Scores for Block 1 per Section
+	Block1Scores: [0, 0, 0, 0, 0, 0, 0], // Scores for Block 1 per Section
 	Block2Scores: [], // Scores for Block 2. Only scores for each section, except Section 10
 	Block2Section10Scores: [0, 0, 0, 0, 0], // Scores for Section 10 in Block 2.
 	Block2Section4Question1Answer: ['Ответ на Кейс 1:', ''], // Stores text asnwer for Question 1 in Section 4, Block 2
@@ -50,8 +48,6 @@ mt.DOM = {
 	UserStatusSelect: 'select#user-status',
 	OfficeTypeSelect: 'select#user-office-type',
 	OfficeNameInput: 'input#user-office-name',
-	CertificationSelect: 'select#certification-type',
-	UserTryNumberInput: 'input#user-try-number',
 	TxtInputs: 'input.txt',
 	bStart : 'button#b-start',
 	bProceed: 'button#b-proceed',
@@ -364,8 +360,6 @@ mt.Visual = {
 			ud.Status = $(mt.DOM.UserStatusSelect).val();
 			ud.OfficeType = $(mt.DOM.OfficeTypeSelect).val();
 			ud.OfficeName = $(mt.DOM.OfficeNameInput).val();
-			ud.CertType = $(mt.DOM.CertificationSelect).val();
-			ud.TryNumber = $(mt.DOM.UserTryNumberInput).val();
 			return ud
 		},
 		getAdminPass: function() {
@@ -620,7 +614,7 @@ mt.Control = {
 	// qSelection is an array of elems, representing order of questions to display. Each elem is an array containing three numbers: block, section, question
 	qSelection: [],
 	currentPosInSelection: -1, // Current position in question selection
-	qToGetFromBlock1: [8, 5, 3, 8, 8, 5, 5, 8], //  Each number is an amount of questions to get from corresponding Section of Block1
+	qToGetFromBlock1: [8, 5, 3, 8, 8, 5, 5], //  Each number is an amount of questions to get from corresponding Section of Block1
 	qCurrentOrdinalNum: 0, // Current question ordinal number
 	qCurrentIndex: [], // Current question index in qSelection. Each elem - array of 3 numbers (block, section, question)
 	tTimeOut: false, // If test time is out flag
