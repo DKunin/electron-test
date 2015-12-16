@@ -181,14 +181,10 @@ var tReport = {
 		tReport.content.push({ text: Position, style: 'extraUserData' });
 		var Status = 'Статус: '+UserData.Status;
 		tReport.content.push({ text: Status, style: 'extraUserData' });
-		var OfficeType = 'Вид образовательного учреждения: '+UserData.OfficeType;
+		var OfficeType = 'Вид учреждения: '+UserData.OfficeType;
 		tReport.content.push({ text: OfficeType, style: 'extraUserData' });
 		var OfficeName = 'Наименование учреждения: '+UserData.OfficeName;
 		tReport.content.push({ text: OfficeName, style: 'extraUserData' });
-		var CertType = 'Вид аттестации: '+UserData.CertificationType;
-		tReport.content.push({ text: CertType, style: 'extraUserData' });
-		var TryNumber = 'Номер попытки: '+UserData.TryNumber;
-		tReport.content.push({ text: TryNumber, style: 'extraUserData' });
 		var TestDate = 'Дата и время начала тестирования: '+StartTime;
 		tReport.content.push({ text: TestDate, style: 'extraUserData' });
 		tReport.content.push({ text: 'Минимальный порог прохождения теста: 70%', style: 'extraUserData' });
@@ -218,8 +214,6 @@ var tReport = {
 		tReport.content.push({ text: Status, style: 'extraUserData' });
 		tReport.content.push({ text: OfficeType, style: 'extraUserData' });
 		tReport.content.push({ text: OfficeName, style: 'extraUserData' });
-		tReport.content.push({ text: CertType, style: 'extraUserData' });
-		tReport.content.push({ text: TryNumber, style: 'extraUserData' });
 		tReport.content.push({ text: TestDate, style: 'extraUserData' });
 		tReport.content.push({ text: 'Минимальный порог прохождения теста: 70%', style: 'extraUserData' });
 		tReport.content.push({ text: Result, style: 'extraUserData'});
