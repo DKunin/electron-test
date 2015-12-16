@@ -17,9 +17,7 @@ mt.Model = {
 		Position: '',
 		Status: '',
 		OfficeType: '',
-		OfficeName: '',
-		CertificationType: '',
-		TryNumber: ''
+		OfficeName: ''
 	},
 	AdminPass: 'admin2015',
 	IsAdmin: true,
@@ -50,8 +48,6 @@ mt.DOM = {
 	UserStatusSelect: 'select#user-status',
 	OfficeTypeSelect: 'select#user-office-type',
 	OfficeNameInput: 'input#user-office-name',
-	CertificationSelect: 'select#certification-type',
-	UserTryNumberInput: 'input#user-try-number',
 	TxtInputs: 'input.txt',
 	bStart : 'button#b-start',
 	bProceed: 'button#b-proceed',
@@ -364,8 +360,6 @@ mt.Visual = {
 			ud.Status = $(mt.DOM.UserStatusSelect).val();
 			ud.OfficeType = $(mt.DOM.OfficeTypeSelect).val();
 			ud.OfficeName = $(mt.DOM.OfficeNameInput).val();
-			ud.CertType = $(mt.DOM.CertificationSelect).val();
-			ud.TryNumber = $(mt.DOM.UserTryNumberInput).val();
 			return ud
 		},
 		getAdminPass: function() {
