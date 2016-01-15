@@ -1,7 +1,7 @@
 {
   "name": "ministryofculture",
   "productName": "MinistryOfCultureTest",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Electron app wrapper for simple html Ministry of culture test",
   "license": "MIT",
   "author": {
