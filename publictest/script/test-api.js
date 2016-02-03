@@ -639,6 +639,7 @@ mt.Control = {
 			var block = mt.Control.qCurrentIndex[0];
 			var section = mt.Control.qCurrentIndex[1];
 			var question = mt.Control.qCurrentIndex[2];
+			this.changeQuestionOrdinal(block, section, question);
 			var $NewQuestion = mt.Visual.assembleQuestion(qBank.questions[block][section][question]);
 			if ($NewQuestion) {
 				mt.Visual.start($NewQuestion, mt.Control.qCurrentOrdinalNum.toString());
@@ -696,7 +697,22 @@ mt.Control = {
 			var block = mt.Control.qCurrentIndex[0];
 			var section = mt.Control.qCurrentIndex[1];
 			var question = mt.Control.qCurrentIndex[2];
-			// Omit Section 7 - if section is 7, so get next position again
+			this.changeQuestionOrdinal(block, section, question);
+			// Omit Section 4. If so - get next position again
+			if ((block===1)&&(section===3)) {
+				this.getNextPosInSelection();
+				var block = mt.Control.qCurrentIndex[0];
+				var section = mt.Control.qCurrentIndex[1];
+				var question = mt.Control.qCurrentIndex[2];
+			}
+			// Omit Section 5. If so - get next position again
+			if ((block===1)&&(section===4)) {
+				this.getNextPosInSelection();
+				var block = mt.Control.qCurrentIndex[0];
+				var section = mt.Control.qCurrentIndex[1];
+				var question = mt.Control.qCurrentIndex[2];
+			}
+			// Omit Section 7. If so - get next position again
 			if ((block===1)&&(section===6)) {
 				this.getNextPosInSelection();
 				var block = mt.Control.qCurrentIndex[0];
@@ -938,23 +954,7 @@ mt.Control = {
 		}
 		
 		
-		// 7. Thin out Block 2, Section 5 questions
-		var block2section5 = qBank.questions[1][4];
-		// Now go through each question in section. Randomly set false to one from 3-4, 5-6, 8-9, 10-11, 13-14, 15-16 
-		var m = [2,3,4,5,7,8,9,10,12,13,14,15]; 
-		for (i=0; i<m.length; i+=2) {
-			var j = m[i]+Math.floor(Math.random() * 2);
-			block2section5[j] = false;
-		}
-		// Remove from questions array all elems set to false
-		for (i=block2section5.length-1; i>=0; i--) {
-			if (block2section5[i]===false) {
-				block2section5.splice(i, 1); //removes 1 elem from pos i
-			}
-		}
-		
-		
-		// 8. Thin out and shuffle Block 2, Section 8 questions
+		// 7. Thin out and shuffle Block 2, Section 8 questions
 		// The Section 8 consists of two logical two subsection
 		// Needed to randomly get 10 questions from first subsection (totally 60), and then 1 from second (totally 10)
 		// Create two temp arrays for each subsection
@@ -1003,7 +1003,7 @@ mt.Control = {
 		qBank.questions[1][7] = Section8NewSequence;
 		
 		
-		// 9. Create array of indexes, representing question sequence of Block2
+		// 8. Create array of indexes, representing question sequence of Block2
 		var block2 = qBank.questions[1];
 		var block2QuestionsSequence = [];
 		for (i=0; i<block2.length; i++) {
@@ -1014,7 +1014,7 @@ mt.Control = {
 		}
 		
 		
-		// 10. Concatenate two arrays of indexes. The resulting array of indexes is a sequence of all question for displaying to user
+		// 9. Concatenate two arrays of indexes. The resulting array of indexes is a sequence of all question for displaying to user
 		mt.Control.qSelection = block1QuestionsSequence.concat(block2QuestionsSequence);
 
 	},
@@ -1062,10 +1062,17 @@ mt.Control = {
 	getNextPosInSelection: function() {
 		// Switch current position in selection
 		this.currentPosInSelection++;
-		// Switch current question ordinal number
-		this.qCurrentOrdinalNum++;
 		// Get new question index
 		this.qCurrentIndex = this.qSelection[mt.Control.currentPosInSelection];
+	},
+	
+	changeQuestionOrdinal: function(block, section, question) {
+		// Block 1 last two sections get new count
+		if ((block===1)&&(section==8)&&(question===0)||(block===1)&&(section==9)&&(question===0)) {
+			this.qCurrentOrdinalNum = 0;
+		}
+		// Switch question ordinal number
+		this.qCurrentOrdinalNum++;
 	},
 	
 	Assessment: {
