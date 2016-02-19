@@ -360,6 +360,7 @@ mt.Visual = {
 			ud.Status = $(mt.DOM.UserStatusSelect).val();
 			ud.OfficeType = $(mt.DOM.OfficeTypeSelect).val();
 			ud.OfficeName = $(mt.DOM.OfficeNameInput).val();
+			
 			return ud
 		},
 		getAdminPass: function() {
