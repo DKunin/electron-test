@@ -1,5 +1,11 @@
 ﻿'use strict';
-var ipc = require('ipc');
+
+try {
+	var ipc = require('ipc');
+} catch(err) {
+	var ipc = {};
+	ipc.send = function(){} 
+}
 
 var tReport = {
 	style: {
@@ -294,8 +300,9 @@ var tReport = {
 			styles: tReport.style.CompleteStyles
 			
 		};
-
-		ipc.send('sendToPdf', docDefinition);
+		if(ipc) {
+			ipc.send('sendToPdf', docDefinition);
+		}
 		
 	},
 	
